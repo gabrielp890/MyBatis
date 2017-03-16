@@ -4,7 +4,58 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper">
+<select parameterType="map" id="getClientes" resultMap="ClienteResult">
+		select
+    
+    c.nombre,
+    c.documento,
+    c.telefono,
+    c.direccion,
+    c.email,
+    c.vetado,
+    
+    ir.id ,
+    ir.CLIENTES_documento ,
+    ir.fechainiciorenta ,
+    ir.fechafinrenta ,
+    
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion 
 
-
+    
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+</select>
           	
 </mapper>
+<resultMap id="ClienteResult" type="Cliente" >
+    <id property="documento" column="cliente_documento" />
+    <result property="nombre" column="cliente_nombre" />
+    <result property="telefono" column="cliente_tel"  />
+    <result property="direccion" column="cliente_direccion" />
+    <result property="email" column="cliente_email" />
+    <result property="vetado" column="cliente_vetado" />    
+    <collection property="ITEMRENTADO" ofType="ItemRentado" />        
+    </resultMap>
+    
+    <resultMap id="ItemRentadoResult" type="ItemRentado" >
+        <id property="id" column="ir_id" />
+        <result property="fechainiciorenta" column="ir_fechainiciorenta" />
+        <result property="fechafinrenta" column="ir_fechafinrenta" />
+    </resultMap>
+    
+    <resultMap id="ItemResult" type="Item" >
+    
+    </resultMap>
+    
+    <resultMap id="TipoItemResult" type="TipoItem" >
+    </resultMap>
