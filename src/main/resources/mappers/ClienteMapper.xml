@@ -54,8 +54,19 @@
     </resultMap>
     
     <resultMap id="ItemResult" type="Item" >
-    
+
+        <id property="id" column="i_id" />
+        <result property="nombre" column="i_nombre" />
+        <result property="descripcion" column="i_descripcion" />
+        <result property="fechalanzamiento" column="i_fechalanzamiento" />
+        <result property="tarifaxdia" column="i_tarifaxdia" />
+        <result property="formatorenta" column="i_formatorenta" />
+        <result property="genero" column="i_genero" />
+        <collection property="ITEMRENTADO" ofType="ItemRentado" />
     </resultMap>
     
     <resultMap id="TipoItemResult" type="TipoItem" >
+        <id property="id" column="ti_id" />
+        <result property="descripcion" column="ti_descripcion" />
+        <collection property="ITEM" ofType="Item" />
     </resultMap>
