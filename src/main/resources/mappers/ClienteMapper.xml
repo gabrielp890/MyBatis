@@ -36,7 +36,7 @@
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
     </select>
 
-    <select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+    <!--<select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
 	select
                 
         c.nombre as nombre,
@@ -68,7 +68,7 @@
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
         
         WHERE c.documento = #{idcli}
-    </select>
+    </select> -->
 
     <insert id="agregarItemRentadoACliente">
         insert into VI_ITEMRENTADO (id,CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta)

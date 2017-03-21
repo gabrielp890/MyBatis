@@ -20,13 +20,19 @@
         i.formatorenta as I_formatorenta,
         i.genero as I_genero,
         
-        ti.id as TI_id,
+        ir.id as IR_id,
+        ir.CLIENTES_documento as IR_documento,
+        ir.fechainiciorenta as IR_fechainiciorenta,
+        ir.fechafinrenta as IR_fechafinrenta,
+        
+         ti.id as TI_id,
         ti.descripcion as TI_descripcion
     
         FROM VI_ITEMS as i
-        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        left join VI_ITEMRENTADO as ir on i.id=ir.ITEMS_id
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
     </select>
-    
+    <!--
     <select id="consularItem" parameterType="map" resultMap="ItemResult">
         select
 
@@ -46,7 +52,7 @@
         
         WHERE i.id = #{idit}
     </select>
-    
+-->    
     <resultMap id="ItemResult" type="Item" >
         <id property="id" column="id" />
         <result property="nombre" column="nombre" />
@@ -56,6 +62,13 @@
         <result property="formatorenta" column="formatorenta" />
         <result property="genero" column="genero" />
         <association property="tipo" javaType="TipoItem" resultMap="TipoItemResult" columnPrefix="TI_"/>
+    </resultMap>
+    
+    <resultMap id="ItemRentadoResult" type="ItemRentado" >
+        <id property="id" column="id" />
+        <result property="fechainiciorenta" column="fechainiciorenta" />
+        <result property="fechafinrenta" column="fechafinrenta" />
+        <association property="item" javaType="Item" resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult' columnPrefix="I_"/>
     </resultMap>
     
     <resultMap id="TipoItemResult" type="TipoItem" >
