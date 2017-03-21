@@ -12,18 +12,6 @@
     <select id="consularItems" parameterType="map" resultMap="ItemResult">
         select
         
-        c.nombre as nombre,
-        c.documento as documento,
-        c.telefono as telefono,
-        c.direccion as direccion,
-        c.email as email,
-        c.vetado as vetado,
-    
-        ir.id as IR_id,
-        ir.CLIENTES_documento as IR_documento,
-        ir.fechainiciorenta as IR_fechainiciorenta,
-        ir.fechafinrenta as IR_fechafinrenta,
-    
         i.id as I_id,
         i.nombre as I_nombre,
         i.descripcion as I_descripcion,
@@ -35,27 +23,13 @@
         ti.id as TI_id,
         ti.descripcion as TI_descripcion
     
-        FROM VI_CLIENTES as c 
-        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
-        left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+        FROM VI_ITEMS as i
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
     </select>
     
     <select id="consularItem" parameterType="map" resultMap="ItemResult">
         select
-        
-        c.nombre as nombre,
-        c.documento as documento,
-        c.telefono as telefono,
-        c.direccion as direccion,
-        c.email as email,
-        c.vetado as vetado,
-    
-        ir.id as IR_id,
-        ir.CLIENTES_documento as IR_documento,
-        ir.fechainiciorenta as IR_fechainiciorenta,
-        ir.fechafinrenta as IR_fechafinrenta,
-    
+
         i.id as I_id,
         i.nombre as I_nombre,
         i.descripcion as I_descripcion,
@@ -67,9 +41,7 @@
         ti.id as TI_id,
         ti.descripcion as TI_descripcion
     
-        FROM VI_CLIENTES as c 
-        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
-        left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+        FROM VI_ITEMS as i
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
         
         WHERE i.id = #{idit}
@@ -83,7 +55,7 @@
         <result property="tarifaxdia" column="tarifaxdia" />
         <result property="formatorenta" column="formatorenta" />
         <result property="genero" column="genero" />
-        <association property="tipo" javaType="TipoItem" resultMap="TipoItemResult" columnPrefix="IR_I_TI_"/>
+        <association property="tipo" javaType="TipoItem" resultMap="TipoItemResult" columnPrefix="TI_"/>
     </resultMap>
     
     <resultMap id="TipoItemResult" type="TipoItem" >
